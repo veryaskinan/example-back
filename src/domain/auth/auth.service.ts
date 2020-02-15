@@ -5,4 +5,7 @@ export class AuthService {
     register() {
         return 'registered'
     }
+    signIn() {
+        return 'signed in, thank you'
+    }
 }

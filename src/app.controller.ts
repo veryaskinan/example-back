@@ -14,9 +14,9 @@ export class AppController {
   index(@Req() request: Request): string {
     // check input (format validation)
     // get route
-    const method  = this.routerService.getMethod(request.body.params);
+    const method  = this.routerService.getMethod(request.body.method);
     // call method
     // return result
-    return method(request.body);
+    return method(request.body.params);
   }
 }
