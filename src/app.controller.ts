@@ -1,22 +1,19 @@
-import {Controller, Post, Req} from '@nestjs/common';
-import { Request } from 'express';
-import { AppService } from './app.service';
-import { RouterService } from './services/router/router.service';
+import {Controller, Post, Req, Header} from '@nestjs/common'
+import { Request } from 'express'
+import { AppService } from './app.service'
+import { RpcService } from './services/rpc/rpc.service'
 
 @Controller()
 export class AppController {
   constructor(
       private readonly appService: AppService,
-      private readonly routerService: RouterService,
+      private readonly rpcService: RpcService,
   ) {}
 
   @Post()
-  index(@Req() request: Request): string {
-    // check input (format validation)
-    // get route
-    const method  = this.routerService.getMethod(request.body.method);
-    // call method
-    // return result
-    return method(request.body.params);
+  @Header('Content-Type', 'application/json')
+  async index(@Req() request: Request): Promise<object> {
+    await this.rpcService.validateRequest(request)
+    return this.rpcService.call(request.body)
   }
 }

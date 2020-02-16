@@ -5,7 +5,10 @@ export class AuthService {
     register() {
         return 'registered'
     }
-    signIn() {
-        return 'signed in, thank you'
+    signIn(credential) {
+        return {
+            accessToken: credential.login,
+            refreshToken: credential.password
+        }
     }
 }
