@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { RouterService as Router } from '../router/router.service'
+import { RpcRequest } from './rpc.request'
 
 @Injectable()
 export class RpcService {
@@ -8,19 +9,15 @@ export class RpcService {
     ) {
     }
 
-    validateRequest(requestBody) {
-        return null
-    }
-
     async call(requestBody) {
         if (Array.isArray(requestBody)) {
-            return Promise.all(requestBody.map(rpcRequest => this.callOne(rpcRequest)))
+            return Promise.all(requestBody.map(rpcRequestData => this.callOne(new RpcRequest(rpcRequestData))))
         } else {
-            return await this.callOne(requestBody)
+            return await this.callOne(new RpcRequest(requestBody))
         }
     }
 
-    async callOne(rpcRequest): Promise<object> {
+    async callOne(rpcRequest: RpcRequest): Promise<object> {
         const method = this.router.getMethod(rpcRequest.method)
         return {
             jsonrpc: '2.0',
