@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuthService } from "../../domain/auth/auth.service";
+import { AuthService } from "../../../domain/auth/auth.service";
 
 const routes = {
     'register': "auth:register",
@@ -18,6 +18,9 @@ export class RouterService {
     }
 
     getMethod(rpcMethodName) {
+        if (!this.routes.hasOwnProperty(rpcMethodName)) {
+            return false
+        }
         const routerString = this.routes[rpcMethodName]
         const [servicePrefix, methodName] = routerString.split(':')
         const method = this[`${servicePrefix}Service`][methodName]

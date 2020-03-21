@@ -1,12 +1,10 @@
-import {Controller, Post, Req, Header} from '@nestjs/common'
+import { Controller, Post, Req, Header } from '@nestjs/common'
 import { Request } from 'express'
-import { AppService } from './app.service'
-import { RpcService } from './services/rpc/rpc.service'
+import { RpcService } from './infrastructure/services/rpc/rpc.service'
 
 @Controller()
 export class AppController {
     constructor(
-        private readonly appService: AppService,
         private readonly rpcService: RpcService,
     ) {}
 
