@@ -9,7 +9,6 @@ export class AppController {
     ) {}
 
     @Post()
-    @Header('Content-Type', 'application/json')
     async index(@Req() request: Request): Promise<object> {
         return this.rpcService.call(request.body)
     }

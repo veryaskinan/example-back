@@ -1,9 +1,10 @@
-import { IsInt, Equals, IsString, IsObject, IsDefined, validate } from 'class-validator';
+import { Equals, IsString, IsObject, IsDefined, validate } from 'class-validator';
+import { IsNumberOrString } from '../../customValidationDecorators/isNumberOrString';
 
 export class RpcRequest {
     @IsDefined()
-    @IsInt()
-    id: number
+    @IsNumberOrString()
+    id: number | string
 
     @Equals('2.0')
     jsonrpc: string

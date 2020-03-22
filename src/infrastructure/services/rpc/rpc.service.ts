@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { RouterService as Router } from '../router/router.service'
 import { RpcRequest } from './rpc.request'
-import { RequestError, MethodError, ParamsError, MethodResult, RequestResult } from '../../applicationObjects'
+import { RequestError, MethodError } from './errors'
+import { RequestResult } from './results'
 
 @Injectable()
 export class RpcService {

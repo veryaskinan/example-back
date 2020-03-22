@@ -1,5 +1,5 @@
-import {MethodResult} from "./method.result";
-import {ParamsError} from "..";
+import { MethodResult } from "./method.result";
+import { RpcError } from "../errors/rpc.error";
 
 export class RequestResult {
 	jsonrpc: string
@@ -10,7 +10,7 @@ export class RequestResult {
 	constructor(requeustId, result) {
 		this.jsonrpc = '2.0'
 		this.result = result instanceof MethodResult ? result : undefined
-		this.error = result instanceof ParamsError ? result : undefined
+		this.error = result instanceof RpcError ? result : undefined
 		this.id = requeustId
 	}
 }
