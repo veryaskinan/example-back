@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { RegisterParams } from './auth.params'
 import { ParamsError } from '../../infrastructure/applicationObjects/errors/params.error'
-import { MethodResult } from '../../infrastructure/applicationObjects/method.result'
+import { MethodResult } from '../../infrastructure/applicationObjects/results/method.result'
 
 @Injectable()
 export class AuthService {
