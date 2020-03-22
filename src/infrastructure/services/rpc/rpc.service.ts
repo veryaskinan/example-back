@@ -13,7 +13,8 @@ export class RpcService {
 
     async call(requestBody) {
         if (Array.isArray(requestBody)) {
-            return Promise.all(requestBody.map(rpcRequestData => this.callOne(rpcRequestData)))
+            const requestResults = await Promise.all(requestBody.map(rpcRequestData => this.callOne(rpcRequestData)))
+            return requestResults.filter(requestResult => requestResult)
         } else {
             return await this.callOne(requestBody)
         }
@@ -32,6 +33,9 @@ export class RpcService {
             return new RequestResult(rpcRequest.id, new MethodError(rpcRequest.method))
         }
         // call method and return result(error)
-        return new RequestResult(rpcRequest.id, await method(rpcRequest.params))
+        const result = await method(rpcRequest.params)
+        if (rpcRequest.id) {
+            return new RequestResult(rpcRequest.id, result)
+        }
     }
 }

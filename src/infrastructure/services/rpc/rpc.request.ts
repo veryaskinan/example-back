@@ -1,8 +1,8 @@
-import { Equals, IsString, IsObject, IsDefined, validate } from 'class-validator';
+import { IsOptional, Equals, IsString, IsObject, validate } from 'class-validator';
 import { IsNumberOrString } from '../../customValidationDecorators/isNumberOrString';
 
 export class RpcRequest {
-    @IsDefined()
+    @IsOptional()
     @IsNumberOrString()
     id: number | string
 
