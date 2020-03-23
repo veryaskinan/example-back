@@ -1,4 +1,4 @@
-import { Controller, Post, Req, Header, UseFilters } from '@nestjs/common'
+import { Controller, Post, Req, Header, UseFilters, HttpCode } from '@nestjs/common'
 import { Request } from 'express'
 import { RpcService } from './infrastructure/services/rpc/rpc.service'
 import { ErrorFilter } from './infrastructure/exceptionFilters/common.error.filter'
@@ -10,6 +10,7 @@ export class AppController {
     ) {}
 
     @Post()
+    @HttpCode(200)
     @UseFilters(ErrorFilter)
     @Header('Content-Type', 'application/json')
     async index(@Req() request: Request): Promise<object> {
